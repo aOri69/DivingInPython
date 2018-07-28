@@ -78,9 +78,9 @@ def CountBdates(id: int):
 
 
 if __name__ == '__main__':
-    d = CountBdates(154136) # 105353423
+    d = CountBdates(3496508)  # 105353423
     print(d)
-    vk = VkApi(154136)
+    vk = VkApi(3496508)
     js = vk.user_get(['sex', 'bdate', 'city', 'photo_max_orig'])
     print(js)
     # js = vk.friends_get(['city', 'bdate', 'photo_max_orig'])
