@@ -32,6 +32,6 @@ def findall(regexp):
 result = calculate({'a': 1, 'b': 2, 'c': 3}, findall)
 correct = {"a": -98, "b": 196, "c": -686}
 if result == correct:
-    print ("Correct")
+    print("Correct")
 else:
-    print ("Incorrect: %s != %s" % (result, correct))
+    print("Incorrect: %s != %s" % (result, correct))
