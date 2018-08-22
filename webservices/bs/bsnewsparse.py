@@ -8,7 +8,10 @@ def get_html(url: str):
 
 
 def get_article(url: str) -> str:
-    article_soup = BeautifulSoup(get_html(url), 'lxml')
+    try:
+        article_soup = BeautifulSoup(get_html(url), 'lxml')
+    except:
+        return ''
     tags = article_soup.find_all('div', 'article__item article__item_alignment_left article__item_html')
     tags_p = [p.text for p in [tag for tag in tags]]
     # for tag in tags:

@@ -3,11 +3,28 @@ import re
 import os
 
 
+def get_children(path: str, filename: str, files: dict) -> dict:
+    with open(f'{path}{filename}', encoding='UTF-8') as f:
+        link_re = re.compile(r"(?<=/wiki/)[\w()]+")  # Искать ссылки можно как угодно, не обязательно через re
+        children = {}
+        page = str(BeautifulSoup(f.read(), 'lxml').find('div', {'id': 'bodyContent'}))
+        links = link_re.findall(page)
+        del page
+        for link in links:
+            if link in files:
+                if not files.get(link) and link != filename:
+                    children[link] = filename  # Setting parent
+        return children
+
+
 # Вспомогательная функция, её наличие не обязательно и не будет проверяться
 def build_tree(start, end, path):
-    link_re = re.compile(r"(?<=/wiki/)[\w()]+")  # Искать ссылки можно как угодно, не обязательно через re
     files = dict.fromkeys(os.listdir(path))  # Словарь вида {"filename1": None, "filename2": None, ...}
     # TODO Проставить всем ключам в files правильного родителя в значение, начиная от start
+    page = start
+    lenght = 0
+    while page != end:
+        children = get_children(path, start, files)
     return files
 
 
